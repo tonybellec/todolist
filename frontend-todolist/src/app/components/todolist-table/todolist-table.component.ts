@@ -3,11 +3,11 @@ import { HttpClient } from "@angular/common/http";
 import { TodolistService } from "../../services/todolist.service";
 
 @Component({
-  selector: 'app-todolist',
-  templateUrl: './todolist.component.html',
-  styleUrls: ['./todolist.component.css']
+  selector: 'app-todolist-table',
+  templateUrl: './todolist-table.component.html',
+  styleUrls: ['./todolist-table.component.css']
 })
-export class TodolistComponent implements OnInit {
+export class TodolistTableComponent implements OnInit {
 
   todosArray = [];
 
