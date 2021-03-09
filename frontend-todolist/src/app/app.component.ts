@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   static url = 'http://localhost:3000';
-  title = 'frontend-todolist';
+  title = 'frontend-todolistTable';
 }
