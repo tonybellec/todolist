@@ -1,0 +1,33 @@
+
+<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form row g-3">
+  <h2 class="mt-5">Add Todo</h2>
+  <div class="col-md-4">
+    <label class="form-label">Title</label>
+    <input type="text" #title="ngModel" ngModel class="form-control"  name="title" required>
+  </div>
+  <div class="col-md-4">
+    <label class="form-label">Description</label>
+    <input type="text" #description="ngModel" ngModel class="form-control" name="comment" required>
+  </div>
+  <div class="col-12">
+    <button class="btn btn-primary" type="submit">Submit</button>
+  </div>
+</form>
+
+
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Title</th>
+    <th scope="col">Description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor = "let data of todosArray">
+    <th scope="row">1</th>
+    <td>{{ data.title }}</td>
+    <td>{{ data.description }}</td>
+  </tr>
+  </tbody>
+</table>
