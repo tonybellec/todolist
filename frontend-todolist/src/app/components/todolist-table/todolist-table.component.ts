@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { TodolistService } from "../../services/todolist.service";
 
+
 @Component({
   selector: 'app-todolist-table',
   templateUrl: './todolist-table.component.html',

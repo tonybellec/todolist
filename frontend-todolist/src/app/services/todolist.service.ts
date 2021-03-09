@@ -13,4 +13,8 @@ export class TodolistService {
   async getTodos(){
     return this.http.get(AppComponent.url + '/todolist');
   }
+
+  //async createTodos(){
+  //  return this.http.post( AppComponent.url + '/todolist', todoToCreate);
+  //}
 }
