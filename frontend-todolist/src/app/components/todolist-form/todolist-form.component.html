@@ -1,12 +1,12 @@
-<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form row g-3">
+<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form row g-3" ngNativeValidate>
   <h2 class="mt-5">Create Post It</h2>
   <div class="col-md-4">
     <label class="form-label">Title</label>
-    <input type="text" #title="ngModel" ngModel class="form-control"  name="title" required>
+    <input type="text" #title="ngModel" ngModel class="form-control"  name="title" required="required">
   </div>
   <div class="col-md-4">
     <label class="form-label">Description</label>
-    <input type="text" #description="ngModel" ngModel class="form-control" name="description" required>
+    <input type="text" #description="ngModel" ngModel class="form-control" name="description" required="required">
   </div>
   <div class="col-12">
     <button class="btn btn-primary" type="submit">Submit</button>

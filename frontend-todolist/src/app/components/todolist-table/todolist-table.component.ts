@@ -24,7 +24,4 @@ export class TodolistTableComponent implements OnInit {
       this.todosArray = data.data;
     });
   }
-
-
-
 }
