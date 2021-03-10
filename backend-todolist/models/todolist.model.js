@@ -2,7 +2,8 @@ var mongoose = require('mongoose')
 
 const TodoSchema  = new mongoose.Schema({
     title: String,
-    description: String
+    description: String,
+    archive: false
 })
 
 const Todo = mongoose.model('todos', TodoSchema)
