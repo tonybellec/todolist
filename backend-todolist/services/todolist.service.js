@@ -19,6 +19,14 @@ exports.createTodo = async function (todo) {
     }
 }
 
+exports.updateTodo = async function (todo,id) {
+    try {
+        return Todo.updateOne({_id : id}, todo);
+    } catch (e) {
+        // Log Errors
+        throw Error('Error while Updating Todos')
+    }
+}
 
 exports.deleteTodoById = async function (id) {
     try {
