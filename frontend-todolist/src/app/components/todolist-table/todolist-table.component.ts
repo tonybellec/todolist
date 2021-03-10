@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { TodolistService } from "../../services/todolist.service";
 
+
 @Component({
   selector: 'app-todolist-table',
   templateUrl: './todolist-table.component.html',
@@ -11,7 +12,7 @@ export class TodolistTableComponent implements OnInit {
 
   todosArray = [];
 
-  constructor(private http: HttpClient, private todolistService: TodolistService) { }
+  constructor(private http: HttpClient, public todolistService: TodolistService) { }
 
   ngOnInit(): void {
     this.getTodos();
@@ -23,4 +24,7 @@ export class TodolistTableComponent implements OnInit {
       this.todosArray = data.data;
     });
   }
+
+
+
 }

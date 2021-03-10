@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { TodolistTableComponent } from './components/todolist-table/todolist-table.component';
 import { TodolistFormComponent } from './components/todolist-form/todolist-form.component';
 
+import { FormsModule } from "@angular/forms";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +18,8 @@ import { TodolistFormComponent } from './components/todolist-form/todolist-form.
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

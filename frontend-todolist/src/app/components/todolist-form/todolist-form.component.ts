@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm} from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { TodolistService } from "../../services/todolist.service";
+
 
 @Component({
   selector: 'app-todolist-form',
@@ -7,9 +11,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TodolistFormComponent implements OnInit {
 
-  constructor() { }
 
-  ngOnInit(): void {
+  constructor(private httpClient: HttpClient, private todolistService: TodolistService) { }
+
+  ngOnInit(): void {};
+
+  onSubmit(f: NgForm){
+
+    this.httpClient.post<any>('http://localhost:3000/todolist', f.value)
+      .subscribe(
+        (Response) => console.log(Response),
+        (Error) => console.log(Error)
+      );
+
+    alert("The form is submitted");
+    f.reset();
+    // this.todolistService.getTodos();
   }
-
 }

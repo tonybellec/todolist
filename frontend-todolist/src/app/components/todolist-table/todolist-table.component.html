@@ -4,13 +4,15 @@
     <th scope="col">#</th>
     <th scope="col">Title</th>
     <th scope="col">Description</th>
+    <th scope="col">Actions</th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor = "let data of todosArray">
-    <th scope="row">1</th>
-    <td>{{ data.title }}</td>
-    <td>{{ data.description }}</td>
+  <tr *ngFor = "let todo of todosArray">
+    <th scope="row">{{ todo._id }}</th>
+    <td>{{ todo.title }}</td>
+    <td>{{ todo.description }}</td>
+    <td><button type="button" (click)="todolistService.deleteTodo(todo._id)">Remove</button></td>
   </tr>
   </tbody>
 </table>

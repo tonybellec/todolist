@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/todolist-table', todolistRouter);
+app.use('/todolist', todolistRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -46,7 +46,7 @@ app.use(function(err, req, res, next) {
 var mongoose = require('mongoose');
 
 //Set up default mongoose connection
-var mongoDB = 'mongodb://127.0.0.1/todolist-table';
+var mongoDB = 'mongodb://127.0.0.1/todolist';
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 
 //Get the default connection
