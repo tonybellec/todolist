@@ -18,6 +18,19 @@ exports.createTodo = async function (req, res) {
     }
 }
 
+exports.UpdateTodo = async function (req, res) {
+    try {
+        await TodolistService.updateTodo(req.body,req.params.id);
+
+        let todos = await TodolistService.getTodos()
+
+        res.statusCode = 200;
+        res.json = { status: 200, data: todos, message: "Successfully Todo Updated" };
+    } catch (e) {
+        res.status(400).json({ status: 400, message: e.message });
+    }
+}
+
 exports.deleteTodoById = async function (req, res) {
     try {
         let todo = await TodolistService.deleteTodoById(req.params.id)

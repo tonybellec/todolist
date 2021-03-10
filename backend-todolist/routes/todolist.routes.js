@@ -10,6 +10,12 @@ router.get('/', function(req, res) {
   })
 });
 
+router.put('/:id', function(req, res, next) {
+  todolistController.UpdateTodo(req, res).then(function (){
+    res.send();
+  })
+});
+
 //Post
 router.post('/', function(req, res) {
   todolistController.createTodo(req, res).then(function (){
