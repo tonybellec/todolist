@@ -18,9 +18,6 @@ export class TodolistFormComponent implements OnInit {
 
   onSubmit(f: NgForm){
 
-    console.log(f.value);
-    console.log("ok");
-
     this.httpClient.post<any>('http://localhost:3000/todolist', f.value)
       .subscribe(
         (Response) => console.log(Response),
