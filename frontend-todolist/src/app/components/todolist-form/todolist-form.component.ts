@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { TodolistService } from "../../services/todolist.service";
+import { TodolistTableComponent } from "../todolist-table/todolist-table.component";
 
 
 @Component({
@@ -12,20 +13,24 @@ import { TodolistService } from "../../services/todolist.service";
 export class TodolistFormComponent implements OnInit {
 
 
-  constructor(private httpClient: HttpClient, private todolistService: TodolistService) { }
+  constructor(private httpClient: HttpClient, private todolistService: TodolistService, private todolistTableComponent: TodolistTableComponent) { }
 
   ngOnInit(): void {};
 
-  onSubmit(f: NgForm){
+  async getTodos() {
+    (await this.todolistService.getTodos()).subscribe(data => {
+      //@ts-ignore
+      this.todosArray = data.data;
+    });
+  }
 
+  async onSubmit(f: NgForm){
     this.httpClient.post<any>('http://localhost:3000/todolist', f.value)
       .subscribe(
         (Response) => console.log(Response),
         (Error) => console.log(Error)
       );
-
-    alert("The form is submitted");
+    await this.todolistTableComponent.ngOnInit();
     f.reset();
-    // this.todolistService.getTodos();
   }
 }

@@ -1,18 +1,57 @@
 <table class="table">
   <thead>
   <tr>
-    <th scope="col">#</th>
     <th scope="col">Title</th>
     <th scope="col">Description</th>
-    <th scope="col">Actions</th>
+    <th scope="col">Archive</th>
+    <th scope="col">Delete</th>
   </tr>
   </thead>
   <tbody>
+  <!-- Loop of the todos -->
   <tr *ngFor = "let todo of todosArray">
-    <th scope="row">{{ todo._id }}</th>
-    <td>{{ todo.title }}</td>
-    <td>{{ todo.description }}</td>
-    <td><button type="button" (click)="todolistService.deleteTodo(todo._id)">Remove</button></td>
+    <td>
+      <!-- Display title if the todo is not archived AND we ask non-archived todos -->
+      <div *ngIf="this.displayStatus == false && todo.archive !== true">{{ todo.title }}</div>
+      <!-- Display title if the we ask all todos -->
+      <div *ngIf="this.displayStatus == true">{{ todo.title }}</div>
+    </td>
+    <td>
+      <!-- Display description if the todo is not archived AND we ask non-archived todos -->
+      <div *ngIf="this.displayStatus == false && todo.archive !== true">{{ todo.description }}</div>
+      <!-- Display description if the we ask all todos -->
+      <div *ngIf="this.displayStatus == true">{{ todo.description }}</div>
+    </td>
+    <td>
+      <!-- Display "Archive" if the todo is not archived AND we ask non-archivied todos -->
+      <div *ngIf="this.displayStatus == false && todo.archive !== true">
+        <input class="form-check-input me-1" name="checkboxArchive" type="checkbox" (click)="this.archiveTodo(todo, true)">Archive
+      </div>
+      <!-- Display the todo (Archived) if is archived AND we ask all todos -->
+      <div *ngIf="this.displayStatus == true && todo.archive == true">
+        <input class="form-check-input me-1" name="checkboxArchive" type="checkbox" (click)="this.archiveTodo(todo, false)" checked="true">Archived
+      </div>
+      <!-- Display the todo (Archive) if is not archived AND we ask all todos -->
+      <div *ngIf="this.displayStatus == true && todo.archive !== true">
+        <input class="form-check-input me-1" name="checkboxArchive" type="checkbox" (click)="this.archiveTodo(todo, true)">Archive
+      </div>
+    </td>
+    <td>
+      <!-- Display delete if the todo is not archived AND we ask non-archivied todos -->
+      <div *ngIf="this.displayStatus == false && todo.archive !== true">
+        <button type="button" class="btn btn-primary" (click)="this.deleteTodo(todo._id)">Delete</button>
+      </div>
+      <!-- Display delete if we ask all todos -->
+      <div *ngIf="this.displayStatus == true">
+        <button type="button" class="btn btn-primary" (click)="this.deleteTodo(todo._id)">Delete</button>
+      </div>
+    </td>
   </tr>
   </tbody>
 </table>
+
+
+<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" (click)="this.displayArchive()" checked>
+  <label class="form-check-label" for="flexSwitchCheckChecked">Show archived todos</label>
+</div>

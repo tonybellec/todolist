@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
 import { TodolistService } from "../../services/todolist.service";
-
 
 @Component({
   selector: 'app-todolist-table',
@@ -11,11 +9,13 @@ import { TodolistService } from "../../services/todolist.service";
 export class TodolistTableComponent implements OnInit {
 
   todosArray = [];
+  displayStatus: boolean;
 
-  constructor(private http: HttpClient, public todolistService: TodolistService) { }
+  constructor(public todolistService: TodolistService) { }
 
   ngOnInit(): void {
     this.getTodos();
+    this.displayStatus = true;
   }
 
   async getTodos() {
@@ -25,6 +25,27 @@ export class TodolistTableComponent implements OnInit {
     });
   }
 
+  async getTodoById(id){
+    (await this.todolistService.getTodoById(id));
+  }
 
+  async archiveTodo(todo, value){
+    let id = todo._id;
+    let newTodo = {
+      archive: value
+    };
+    await this.todolistService.update(id, newTodo);
+    await this.getTodos();
+  }
 
+  async deleteTodo(id){
+    await this.todolistService.deleteTodo(id);
+    await this.getTodos();
+  }
+
+  async displayArchive(){
+    this.displayStatus = !this.displayStatus;
+    await this.getTodos();
+    return this.displayStatus;
+  }
 }
