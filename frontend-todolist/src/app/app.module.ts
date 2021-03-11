@@ -21,7 +21,7 @@ import { FormsModule } from "@angular/forms";
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [TodolistTableComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
