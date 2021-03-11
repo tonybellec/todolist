@@ -43,10 +43,8 @@ export class TodolistTableComponent implements OnInit {
     await this.getTodos();
   }
 
-
   async displayArchive(){
     this.displayStatus = !this.displayStatus;
-    alert(this.displayStatus);
     await this.getTodos();
     return this.displayStatus;
   }
