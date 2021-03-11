@@ -13,14 +13,20 @@ export class TodolistService {
 
   /** GET: Get all todos from the database */
   async getTodos(){
-    return this.http.get(AppComponent.url + '/todolist');
+    return this.http.get(AppComponent.url + '/todolist')
+  }
+
+  /** UPDATE: update a todo */
+  async update(id, data){
+    return this.http.put(AppComponent.url + '/todolist/' + id, data)
+      .subscribe(
+        (Response) => console.log(Response),
+        (Error) => console.log(Error)
+      )
   }
 
   /** DELETE: delete a todo from the database */
   async deleteTodo(id){
-
-    // Test ID received
-    // alert(id);
     return this.http.delete(AppComponent.url + '/todolist/' + id)
       .subscribe(
         (Response) => console.log(Response),

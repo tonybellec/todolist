@@ -10,10 +10,15 @@
   <tbody>
   <tr *ngFor = "let todo of todosArray">
     <th scope="row">{{ todo._id }}</th>
-    <td><input class="form-check-input me-1" type="checkbox" (click)="todolistService.archiveTodo()" value="1" aria-label="...">Archiver</td>
+    <div *ngIf="todo.archive == true; else elseBlock">
+      <td><input class="form-check-input me-1" name="checkboxArchive" type="checkbox" (click)="this.archiveTodo(todo, false)" checked="true">Archived</td>
+    </div>
+    <ng-template #elseBlock>
+      <td><input class="form-check-input me-1" name="checkboxArchive" type="checkbox" (click)="this.archiveTodo(todo, true)">Archive</td>
+    </ng-template>
     <td>{{ todo.title }}</td>
     <td>{{ todo.description }}</td>
-    <td><button type="button" (click)="todolistService.deleteTodo(todo._id)">Remove</button></td>
+    <td><button type="button" (click)="this.deleteTodo(todo._id)">Remove</button></td>
   </tr>
   </tbody>
 </table>
