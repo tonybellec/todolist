@@ -5,27 +5,34 @@ var todolistController = require('../controllers/todolist.controller')
 
 //GetAll
 router.get('/', function(req, res) {
-  todolistController.getTodos(req, res).then(function (){
+  todolistController.getAll(req, res).then(function (){
+    res.send();
+  })
+});
+
+//GetById
+router.get('/:id', function(req, res) {
+  todolistController.getById(req, res).then(function (){
     res.send();
   })
 });
 
 router.put('/:id', function(req, res, next) {
-  todolistController.UpdateTodo(req, res).then(function (){
+  todolistController.UpdateById(req, res).then(function (){
     res.send();
   })
 });
 
 //Post
 router.post('/', function(req, res) {
-  todolistController.createTodo(req, res).then(function (){
+  todolistController.create(req, res).then(function (){
     res.send();
   })
 });
 
 //DeleteById
 router.delete('/:id', function(req, res) {
-  todolistController.deleteTodoById(req, res).then(function (){
+  todolistController.deleteById(req, res).then(function (){
     res.send();
   })
 });
