@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { AppComponent } from "../app.component";
+import { Observable } from "rxjs";
 
 
 @Injectable({
@@ -9,11 +10,14 @@ import { AppComponent } from "../app.component";
 
 export class TodolistService {
 
+  private todosServiceArray: Observable<Object>;
+
   constructor(private http: HttpClient) { }
 
   /** GET: Get all todos from the database */
   async getTodos(){
-    return this.http.get(AppComponent.url + '/todolist')
+    this.todosServiceArray = this.http.get(AppComponent.url + '/todolist');
+    return this.todosServiceArray;
   }
 
   /** GETBYID: get a todo by ID */
@@ -25,9 +29,19 @@ export class TodolistService {
       );
   }
 
+  /** CREATE: create a todo */
+  async createTodo(object){
+    this.http.post<any>(AppComponent.url + '/todolist/', object)
+      .subscribe(
+        (Response) => console.log(Response),
+        (Error) => console.log(Error)
+      )
+    await this.getTodos();
+  }
+
   /** UPDATE: update a todo */
   async update(id, data){
-    return this.http.put(AppComponent.url + '/todolist/' + id, data)
+    this.http.put(AppComponent.url + '/todolist/' + id, data)
       .subscribe(
         (Response) => console.log(Response),
         (Error) => console.log(Error)
@@ -36,7 +50,7 @@ export class TodolistService {
 
   /** DELETE: delete a todo from the database */
   async deleteTodo(id){
-    return this.http.delete(AppComponent.url + '/todolist/' + id)
+    this.http.delete(AppComponent.url + '/todolist/' + id)
       .subscribe(
         (Response) => console.log(Response),
         (Error) => console.log(Error)

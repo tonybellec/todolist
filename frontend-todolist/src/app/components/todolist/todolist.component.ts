@@ -1,21 +1,29 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm} from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { TodolistService } from "../../services/todolist.service";
 
 @Component({
-  selector: 'app-todolist-table',
-  templateUrl: './todolist-table.component.html',
-  styleUrls: ['./todolist-table.component.css']
+  selector: 'app-todolist',
+  templateUrl: './todolist.component.html',
+  styleUrls: ['./todolist.component.css']
 })
-export class TodolistTableComponent implements OnInit {
+export class TodolistComponent implements OnInit {
 
   todosArray = [];
   displayStatus: boolean;
 
-  constructor(public todolistService: TodolistService) { }
+  constructor(private httpClient: HttpClient, private todolistService: TodolistService) { }
 
   ngOnInit(): void {
     this.getTodos();
     this.displayStatus = true;
+  }
+
+  async onSubmit(f: NgForm){
+    await this.todolistService.createTodo(f.value);
+    f.reset();
+    await this.getTodos();
   }
 
   async getTodos() {
@@ -38,14 +46,14 @@ export class TodolistTableComponent implements OnInit {
     await this.getTodos();
   }
 
-  async deleteTodo(id){
-    await this.todolistService.deleteTodo(id);
-    await this.getTodos();
-  }
-
   async displayArchive(){
     this.displayStatus = !this.displayStatus;
     await this.getTodos();
     return this.displayStatus;
+  }
+
+  async deleteTodo(id){
+    await this.todolistService.deleteTodo(id);
+    await this.getTodos();
   }
 }

@@ -2,7 +2,7 @@ let TodolistService = require('../services/todolist.service')
 
 exports.getAll = async function (req, res) {
     try {
-        let todos = await TodolistService.getTodos()
+        let todos = await TodolistService.getAll()
         res.status(200).json({ status: 200, data: todos, message: "Successfully Todos search" });
     } catch (e) {
         res.status(400).json({ status: 400, message: e.message });
