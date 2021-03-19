@@ -36,7 +36,6 @@ export class TodolistService {
         (Response) => console.log(Response),
         (Error) => console.log(Error)
       )
-    await this.getTodos();
   }
 
   /** UPDATE: update a todo */
